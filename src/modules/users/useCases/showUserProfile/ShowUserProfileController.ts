@@ -7,7 +7,7 @@ class ShowUserProfileController {
 
   handle(request: Request, response: Response): Response {
     const { user_id: user_idRaw } = request.params;
-    const user_id = user_idRaw.toString();
+    const user_id = String(user_idRaw);
 
     try {
       const user = this.showUserProfileUseCase.execute({ user_id });
