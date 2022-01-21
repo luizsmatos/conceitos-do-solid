@@ -1,0 +1,328 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Users API",
+    "description": "Users API documentation",
+    "version": "1.0.0",
+    "contact": {
+      "email": "gusstavopdm@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "User name"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "User email"
+                  }
+                },
+                "example": {
+                  "name": "John Doe",
+                  "email": "johndoe@user.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "User id"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "description": "User admin status"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "User name"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "User email"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "User creation date"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "User last update date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User Already Exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all users",
+        "description": "Only admin users can access this endpoint",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "ref$": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "User id"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "description": "User admin status"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "User name"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "User email"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "User creation date"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "User last update date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}/admin": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update a user admin status",
+        "description": "Update a user admin status",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User updated a admin status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "User id"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "description": "User admin status"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "User name"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "User email"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "User creation date"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "User last update date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get a user",
+        "description": "Get a user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "User id"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "description": "User admin status"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "User name"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "User email"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "User creation date"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "User last update date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
