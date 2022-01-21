@@ -20,7 +20,11 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 📚 Documentação
 
-  - Em desenvolvimento!
+  ```bash
+# Após iniciar o servidor, acesse:
+
+http://localhost:3333/api-docs
+```
 
 ## 🚀 Como executar
 
